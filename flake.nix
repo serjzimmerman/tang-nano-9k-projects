@@ -8,10 +8,20 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sbt = {
+      url = "github:zaninime/sbt-derivation";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { flake-parts, treefmt-nix, ... }@inputs:
+    {
+      nixpkgs,
+      flake-parts,
+      treefmt-nix,
+      sbt,
+      ...
+    }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ treefmt-nix.flakeModule ];
 
@@ -21,13 +31,18 @@
       ];
 
       perSystem =
-        { ... }:
+        { system, ... }:
         {
           imports = [
             ./nix/treefmt.nix
             ./nix/shells.nix
             ./projects
           ];
+
+          _module.args.pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ sbt.overlays.default ];
+          };
         };
     };
 }

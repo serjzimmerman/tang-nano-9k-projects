@@ -5,7 +5,10 @@ alias r := run-workflows
 run-workflows:
     @act -P ubuntu-22.04=ghcr.io/catthehacker/ubuntu:runner-22.04
 
-check:
+commitlint:
+    @nix run nixpkgs#commitlint -- --from HEAD~ --to HEAD --verbose
+
+check: commitlint
     @nix flake check
 
 check-format:

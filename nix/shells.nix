@@ -9,6 +9,10 @@
         openfpgaloader
         usbutils
         just
+        metals
+        scalafmt
+        sbt
+        scala_2_12
       ]
       ++ (with pkgs.python3Packages; [ apycula ]);
   };

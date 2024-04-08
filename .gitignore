@@ -2,3 +2,6 @@
 .vscode/
 .direnv/
 /result
+.metals/
+out/
+result

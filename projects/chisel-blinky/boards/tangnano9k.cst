@@ -1,0 +1,8 @@
+// https://wiki.sipeed.com/hardware/en/tang/Tang-Nano-9K/Nano-9K.html#Pinmap
+// https://wiki.sipeed.com/hardware/en/tang/Tang-Nano-9K/examples/led.html 
+// https://github.com/YosysHQ/apicula/blob/master/examples/tangnano9k.cst
+// Part Number: GW1NR-LV9QN88PC6/I5
+
+IO_LOC "io_led0" 10;
+IO_LOC "clock" 52;
+IO_LOC "reset" 4;

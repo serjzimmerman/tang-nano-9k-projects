@@ -13,6 +13,7 @@
         scalafmt
         sbt
         scala_2_12
+        circt
       ]
       ++ (with pkgs.python3Packages; [ apycula ]);
   };

@@ -42,7 +42,7 @@ class Blinky(bits: Int) extends Module {
 class TopWrapper(freq: Int, bits: Int) extends Module {
   val io = IO(new BlinkyIO(bits))
   val invertedReset = ~reset.asBool
-  val dividedClock = withReset(reset = invertedReset) {
+  val dividedClock = withReset(reset = false.B) {
     ClockDivider(clock, freq)
   }
   val top = withClockAndReset(clock = dividedClock, reset = invertedReset) {

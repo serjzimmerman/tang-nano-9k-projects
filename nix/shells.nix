@@ -14,7 +14,10 @@
         sbt
         scala_2_12
         circt
+        verible
       ]
       ++ (with pkgs.python3Packages; [ apycula ]);
+
+    CHISEL_FIRTOOL_PATH = "${pkgs.circt}/bin";
   };
 }

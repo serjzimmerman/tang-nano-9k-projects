@@ -1,0 +1,5 @@
+*.fs
+*.json
+target/
+generated/
+project/

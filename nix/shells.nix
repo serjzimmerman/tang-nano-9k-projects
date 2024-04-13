@@ -15,6 +15,7 @@
         scala_2_12
         circt
         verible
+        gtkwave
       ]
       ++ (with pkgs.python3Packages; [ apycula ]);
 

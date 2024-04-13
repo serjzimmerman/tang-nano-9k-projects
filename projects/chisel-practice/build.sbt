@@ -5,6 +5,13 @@ lazy val root = (project in file("."))
     name := "chisel-practice",
     version := "0.1.0",
     scalaVersion := "2.13.12",
+    scalacOptions ++= Seq(
+      "-language:reflectiveCalls",
+      "-deprecation",
+      "-feature",
+      "-Xcheckinit",
+      "-Ymacro-annotations"
+    ),
     libraryDependencies ++= Seq(
       "org.chipsalliance" %% "chisel" % chiselVersion
     ),

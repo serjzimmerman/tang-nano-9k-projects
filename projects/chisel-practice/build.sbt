@@ -1,4 +1,5 @@
 val chiselVersion = "6.2.0"
+val chiselTestVersion = "6.0.0"
 
 lazy val root = (project in file("."))
   .settings(
@@ -13,6 +14,7 @@ lazy val root = (project in file("."))
       "-Ymacro-annotations"
     ),
     libraryDependencies ++= Seq(
+      "edu.berkeley.cs" %% "chiseltest" % chiselTestVersion,
       "org.chipsalliance" %% "chisel" % chiselVersion
     ),
     addCompilerPlugin(

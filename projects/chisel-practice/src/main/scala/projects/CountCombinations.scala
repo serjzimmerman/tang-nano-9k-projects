@@ -25,6 +25,7 @@ class CountCombinations(numBits: Int) extends Module {
 
 class CountCombinationsTopIO(numDigits: Int, numLeds: Int) extends Bundle {
   val digit = Output(UInt(numDigits.W))
+  val led = Output(UInt(numLeds.W))
   val segments = Output(UInt(8.W))
 }
 
@@ -55,11 +56,13 @@ class CountCombinationsTop(
   io.segments <> sevenseg.io.segments
   sevenseg.io.value := top.io.count
   top.io.value := value
+  io.led := value
 }
 
 object CountCombinationsVerilog extends App {
   ChiselStage.emitSystemVerilogFile(
-    new CountCombinationsTop(8, 4, 6, 135_000, 5_000_000, 0xff),
+    new CountCombinationsTop(8 /* numBits */, 4 /* numDigits */,
+      8 /* numLeds */, 135_000, 5_000_000, 256),
     args = Array("--target-dir", "generated/projects"),
     firtoolOpts = Array(
       "--disable-all-randomization",

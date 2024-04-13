@@ -36,7 +36,12 @@ mkSbtDerivation {
     runHook postBuild
   '';
 
-  depsSha256 = "sha256-g1aqoVPugEIxSrmw7S0+MM6TnD4O0IzdFZiRpmQCHQI=";
+  depsSha256 = "sha256-zenDa/z5edMIRRwwsbHh99IezYQSQFtYRwtqlDfAYwA=";
+
+  doCheck = true;
+  checkPhase = ''
+    sbt test
+  '';
 
   installPhase = ''
     mkdir -p $out/share

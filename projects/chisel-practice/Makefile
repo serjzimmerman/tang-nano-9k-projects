@@ -11,7 +11,7 @@ NEXTPNR_FREQ = 27.00
 .DEFAULT_GOAL := all
 .PHONY := clean all
 
-all: blinky.fs sevenseg.fs
+all: blinky.fs sevenseg.fs countcomb.fs
 
 generated/blinky/Top.sv:
 	$(SBT) "runMain blinky.BlinkyVerilog"
@@ -38,6 +38,19 @@ pnrsevenseg.json: sevenseg.json
 
 sevenseg.fs: pnrsevenseg.json
 	$(APICULA) -d $(NEXTPNR_FAMILY) -o sevenseg.fs pnrsevenseg.json
+
+generated/projects/SevenSegTop.sv: ./src/main/scala/projects/CountCombinations.scala
+	$(SBT) "runMain projects.CountCombinationsVerilog"
+
+countcomb.json: generated/projects/SevenSegTop.sv
+	$(YOSYS) -p "read_verilog -sv generated/projects/SevenSegTop.sv; synth_gowin -json countcomb.json"
+
+pnrcountcomb.json: countcomb.json
+	$(NEXTPNR) --freq $(NEXTPNR_FREQ) --json countcomb.json --write pnrcountcomb.json --device $(NEXTPNR_DEVICE) \
+	--family $(NEXTPNR_FAMILY) --cst boards/tangnano9k.cst
+
+countcomb.fs: pnrcountcomb.json
+	$(APICULA) -d $(NEXTPNR_FAMILY) -o countcomb.fs pnrcountcomb.json
 
 clean:
 	rm -rf target/ *.fs *.json generated/

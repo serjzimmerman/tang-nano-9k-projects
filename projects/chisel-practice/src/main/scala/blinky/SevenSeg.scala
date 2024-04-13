@@ -85,7 +85,7 @@ class SevenSegTop(
 
 object SevenSegVerilog extends App {
   ChiselStage.emitSystemVerilogFile(
-    new SevenSegTop(4, 6, 270_000, 2_700_000, 128),
+    new SevenSegTop(4, 6, 270_000, 2_700_000, 0xffff),
     args = Array("--target-dir", "generated/blinky"),
     firtoolOpts = Array(
       "--disable-all-randomization",

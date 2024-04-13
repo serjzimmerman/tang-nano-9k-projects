@@ -1,15 +1,13 @@
 on:
   - push
 jobs:
-  check-linux:
+  build-all:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: cachix/install-nix-action@v24
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: docker/setup-qemu-action@v3
         with:
           platforms: aarch64
-      - run: nix run nixpkgs#just check
+      - run: nix run nixpkgs#just build-all

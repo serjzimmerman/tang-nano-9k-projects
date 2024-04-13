@@ -36,9 +36,10 @@ mkSbtDerivation {
     runHook postBuild
   '';
 
-  depsSha256 = "sha256-jeLxdCXKVIrWjLtXGyu80halnMckL92AR9BumR2Lsew=";
+  depsSha256 = "sha256-g1aqoVPugEIxSrmw7S0+MM6TnD4O0IzdFZiRpmQCHQI=";
 
   installPhase = ''
-    install -Dm 444 -T blinky.fs $out/share/blinky.fs
+    mkdir -p $out/share
+    install -Dm 444 *.fs -t $out/share
   '';
 }

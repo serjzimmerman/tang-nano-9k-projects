@@ -25,5 +25,10 @@ update-inputs:
       echo $(cd $(dirname $i) && nix flake update)
     done
 
+build-all:
+    nix build .#blinky -L --show-trace
+    nix build .#chisel-blinky -L --show-trace
+    nix build .#chisel-practice -L --show-trace
+
 addlicense:
     @find . -type f \( -name "*.cpp" -o -name "*.hpp" -o -name "*.cc" -o -name "*.h" \) -exec addlicense -f LICENSE -l mit {} \;

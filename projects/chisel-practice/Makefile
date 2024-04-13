@@ -39,11 +39,11 @@ pnrsevenseg.json: sevenseg.json
 sevenseg.fs: pnrsevenseg.json
 	$(APICULA) -d $(NEXTPNR_FAMILY) -o sevenseg.fs pnrsevenseg.json
 
-generated/projects/SevenSegTop.sv: ./src/main/scala/projects/CountCombinations.scala
+generated/projects/CountCombinationsTop.sv: ./src/main/scala/projects/CountCombinations.scala
 	$(SBT) "runMain projects.CountCombinationsVerilog"
 
-countcomb.json: generated/projects/SevenSegTop.sv
-	$(YOSYS) -p "read_verilog -sv generated/projects/SevenSegTop.sv; synth_gowin -json countcomb.json"
+countcomb.json: generated/projects/CountCombinationsTop.sv
+	$(YOSYS) -p "read_verilog -sv generated/projects/CountCombinationsTop.sv; synth_gowin -json countcomb.json"
 
 pnrcountcomb.json: countcomb.json
 	$(NEXTPNR) --freq $(NEXTPNR_FREQ) --json countcomb.json --write pnrcountcomb.json --device $(NEXTPNR_DEVICE) \

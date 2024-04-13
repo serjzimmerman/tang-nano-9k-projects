@@ -38,7 +38,7 @@ class SevenSegHexDisplay(numDigits: Int, digitDivideBy: Int) extends Module {
     )
 
   val maxCounter: Int = digitDivideBy;
-  val (_, counterWrap) = Counter(true.B, digitDivideBy / 2)
+  val (_, counterWrap) = Counter(true.B, digitDivideBy)
 
   when(counterWrap) {
     currentDigit := (currentDigit + 1.U) % numDigits.asUInt
@@ -85,7 +85,7 @@ class SevenSegTop(
 
 object SevenSegVerilog extends App {
   ChiselStage.emitSystemVerilogFile(
-    new SevenSegTop(4, 6, 270_000, 2_700_000, 0xffff),
+    new SevenSegTop(4, 6, 135_000, 2_700_000, 0xffff),
     args = Array("--target-dir", "generated/blinky"),
     firtoolOpts = Array(
       "--disable-all-randomization",

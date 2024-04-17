@@ -15,12 +15,24 @@ class CountCombinations(numBits: Int) extends Module {
   })
 
   private val three = "b11".U
+
+  val areOnes =
+    VecInit
+      .tabulate(numBits - 1) { i =>
+        val currentBits = io.value(i + 1, i)
+        currentBits === three
+      };
+
+  val utilVec = VecInit(0.U(numBits.W).asBools)
+  for (i <- 0 until numBits - 1) {
+    utilVec(i) := (if (i == 0) { areOnes(i) }
+                   else {
+                     !utilVec(i - 1) && areOnes(i)
+                   })
+  }
+
   io.count :=
-    PopCount(
-      VecInit
-        .tabulate(numBits - 1) { i => (io.value(i + 1, i) === three) }
-        .asUInt
-    )
+    PopCount(utilVec.asUInt)
 }
 
 class CountCombinationsTopIO(numDigits: Int, numLeds: Int) extends Bundle {

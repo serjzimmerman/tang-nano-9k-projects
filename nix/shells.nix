@@ -16,8 +16,12 @@
         circt
         verible
         gtkwave
+        netlistsvg
       ]
-      ++ (with pkgs.python3Packages; [ apycula ]);
+      ++ (with pkgs.python3Packages; [
+        apycula
+        cairosvg
+      ]);
 
     CHISEL_FIRTOOL_PATH = "${pkgs.circt}/bin";
   };

@@ -4,3 +4,6 @@ target/
 generated/
 project/
 test_run_dir/
+*.svg
+*.pdf
+*.png

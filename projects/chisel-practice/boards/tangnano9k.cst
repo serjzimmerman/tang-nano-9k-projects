@@ -3,6 +3,17 @@
 // https://github.com/YosysHQ/apicula/blob/master/examples/tangnano9k.cst
 // Part Number: GW1NR-LV9QN88PC6/I5
 
+IO_LOC "io_switchNumber[0]" 33; 
+IO_LOC "io_switchNumber[1]" 30;
+IO_LOC "io_switchNumber[2]" 29;
+IO_LOC "io_switchNumber[3]" 28;
+IO_LOC "io_switchNumber[4]" 26;
+IO_LOC "io_switchNumber[5]" 25;
+IO_LOC "io_switchNumber[6]" 39;
+IO_LOC "io_switchNumber[7]" 36;
+
+IO_LOC "io_switch" 41;
+
 IO_LOC "io_led[0]" 76;
 IO_LOC "io_led[1]" 38;
 IO_LOC "io_led[2]" 37;

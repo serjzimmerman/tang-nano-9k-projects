@@ -27,6 +27,8 @@ class CountCombinationsTopIO(numDigits: Int, numLeds: Int) extends Bundle {
   val digit = Output(UInt(numDigits.W))
   val led = Output(UInt(numLeds.W))
   val segments = Output(UInt(8.W))
+  val switchNumber = Input(UInt(numLeds.W))
+  val switch = Input(Bool())
 }
 
 class CountCombinationsTop(
@@ -42,10 +44,11 @@ class CountCombinationsTop(
   val dividedClock = withReset(reset = false.B) {
     ClockDivider(clock, countFreq)
   }
-  val (value, _) =
+  val (valueTmp, _) =
     withClockAndReset(clock = dividedClock, reset = invertedReset) {
       Counter(true.B, countMax)
     }
+
   val top = withReset(reset = invertedReset) {
     Module(new CountCombinations(numBits))
   }
@@ -55,14 +58,14 @@ class CountCombinationsTop(
   io.digit <> sevenseg.io.digitSelect
   io.segments <> sevenseg.io.segments
   sevenseg.io.value := top.io.count
-  top.io.value := value
-  io.led := value
+  io.led := Mux(io.switch, ~io.switchNumber, valueTmp)
+  top.io.value := Mux(io.switch, ~io.switchNumber, valueTmp)
 }
 
 object CountCombinationsVerilog extends App {
   ChiselStage.emitSystemVerilogFile(
     new CountCombinationsTop(8 /* numBits */, 4 /* numDigits */,
-      8 /* numLeds */, 135_000, 5_000_000, 256),
+      8 /* numLeds */, 135_000, 50_000_000, 256),
     args = Array("--target-dir", "generated/projects"),
     firtoolOpts = Array(
       "--disable-all-randomization",

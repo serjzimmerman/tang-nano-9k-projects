@@ -6,10 +6,10 @@ import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
 class CountCombinationsTester extends AnyFlatSpec with ChiselScalatestTester {
-  "CountCombinations of 0b11 in 0b11111111" should "be equal to 7" in {
+  "CountCombinations of 0b11 in 0b11111111" should "be equal to 4" in {
     test(new CountCombinations(8)) { dut =>
       dut.io.value.poke("b11111111".U)
-      dut.io.count.expect(7.U)
+      dut.io.count.expect(4.U)
     }
   }
 
@@ -17,6 +17,19 @@ class CountCombinationsTester extends AnyFlatSpec with ChiselScalatestTester {
     test(new CountCombinations(8)) { dut =>
       dut.io.value.poke("b00000000".U)
       dut.io.count.expect(0.U)
+    }
+  }
+  
+  "CountCombinations of 0b11 in 0b00000111" should "be equal to 1" in {
+    test(new CountCombinations(8)) { dut =>
+      dut.io.value.poke("b00000111".U)
+      dut.io.count.expect(1.U)
+    }
+  }
+  "CountCombinations of 0b11 in 0b11100111" should "be equal to 2" in {
+    test(new CountCombinations(8)) { dut =>
+      dut.io.value.poke("b11100111".U)
+      dut.io.count.expect(2.U)
     }
   }
 }

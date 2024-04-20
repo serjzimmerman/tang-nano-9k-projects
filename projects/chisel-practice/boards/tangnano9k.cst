@@ -37,10 +37,10 @@ IO_LOC "io_segments[5]" 70; // F
 IO_LOC "io_segments[6]" 54; // G
 IO_LOC "io_segments[7]" 57; // DP
 
-IO_LOC "io_dac[0]" 82;
-IO_LOC "io_dac[1]" 81;
+IO_LOC "io_dac[0]" 81;
+IO_LOC "io_dac[1]" 79;
 IO_LOC "io_dac[2]" 80;
-IO_LOC "io_dac[3]" 79;
+IO_LOC "io_dac[3]" 82;
 
 IO_LOC "clock" 52;
 IO_LOC "reset" 4;

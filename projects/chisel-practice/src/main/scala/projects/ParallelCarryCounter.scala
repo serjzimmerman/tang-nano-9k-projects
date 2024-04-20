@@ -77,7 +77,7 @@ object ParallelCarryCounterVerilog extends App {
   ChiselStage.emitSystemVerilogFile(
     new ParallelCarryCounterTop(/* numDigits */ 4, /* numLeds*/ 8,
       /* digitDivideBy */ 135_000,
-      /* countMax */ 13, /* countFreq1 */ 27_000_000, /* countFreq2 */ 54),
+      /* countMax */ 13, /* countFreq1 */ 27_000_000, /* countFreq2 */ 5400),
     args = Array("--target-dir", "generated/projects"),
     firtoolOpts = Array(
       "--disable-all-randomization",

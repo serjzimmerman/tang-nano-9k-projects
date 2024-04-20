@@ -63,5 +63,8 @@ ParallelCarryCounter.json: generated/projects/ParallelCarryCounterTop.sv
 %.svg: %.json
 	$(NETLISTSVG) $^ -o $@
 
+%.png: %.json
+	$(NETLISTSVG) $^ -o $@
+
 clean:
 	rm -rf target/ *.fs *.json generated/

@@ -31,13 +31,17 @@
       ];
 
       perSystem =
-        { system, ... }:
+        { system, self', ... }:
         {
           imports = [
             ./nix/treefmt.nix
             ./nix/shells.nix
             ./projects
           ];
+
+          checks = {
+            inherit (self'.packages) blinky chisel-practice chisel-blinky;
+          };
 
           _module.args.pkgs = import nixpkgs {
             inherit system;
